@@ -9,7 +9,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     println!("Hello, world!");
 
     let mut response =
-        ureq::get("https://rss.nytimes.com/services/xml/rss/nyt/recent.xml").call()?;
+        ureq::get("https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml").call()?;
 
     let chn = Channel::read_from(BufReader::new(response.body_mut().as_reader()))?;
     if chn.items.is_empty() {
@@ -17,11 +17,14 @@ fn main() -> Result<(), Box<dyn Error>> {
     }
 
     for item in chn.items.into_iter() {
-        println!("{}", item.guid().unwrap().value());
+        //println!("{}", item.guid().unwrap().value());
         println!("{}", item.title().unwrap());
         let mut hasher = AHasher::default();
-        hasher.write(item.guid().unwrap().value().as_bytes());
-        println!("{}\n", hasher.finish());
+        let b = item.guid().unwrap().value().as_bytes();
+        assert!(!b.is_empty());
+        hasher.write(b);
+        println!("Hash: {:?} \n", hasher.finish());
+        //println!("end of item");
     }
 
     Ok(())
