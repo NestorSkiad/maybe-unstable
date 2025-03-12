@@ -17,8 +17,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     }
 
     for item in chn.items.into_iter() {
-        println!("{}", item.guid().unwrap().value());
-        println!("{}", item.title().unwrap());
+        println!("{:?}", item.title());
         let mut hasher = AHasher::default();
         hasher.write(item.guid().unwrap().value().as_bytes());
         println!("{}\n", hasher.finish());
