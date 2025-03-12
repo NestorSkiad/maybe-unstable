@@ -1,3 +1,3 @@
-# artpir
+# with ureq branch
 
-Copyright Nestor Skiadas 2025, all rights reserved. Do not reproduce, reuse, redistribute or piss Nestor off.
+This doesn't work with Miri on Windows.
