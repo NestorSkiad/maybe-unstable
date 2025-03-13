@@ -13,14 +13,10 @@ fn main() -> Result<(), Box<dyn Error>> {
     }
 
     for item in chn.items.into_iter() {
-        //println!("{}", item.guid().unwrap().value());
         println!("{:?}", item.title());
         let mut hasher = AHasher::default();
-        //let b = item.guid().unwrap().value().as_bytes();
-        //assert!(!b.is_empty());
         hasher.write(item.link().unwrap().as_bytes());
-        println!("Hash: {:?}\n", hasher.finish());
-        //println!("end of item");
+        println!("Hash: {:?}\n", hasher.finish()); // should fail here
     }
 
     Ok(())
